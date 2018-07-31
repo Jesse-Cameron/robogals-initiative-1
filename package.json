@@ -1,0 +1,29 @@
+{
+  "name": "robogals-initiative-1",
+  "version": "0.1.0",
+  "description": "Welcome to the repository for the first ever Robogals' Technology Initiative!",
+  "main": "index.js",
+  "scripts": {
+    "lint": "xo",
+    "test": "xo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jesse-Cameron/robogals-initiative-1.git"
+  },
+  "author": "Robogals Global",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "xo": "^0.21.1"
+  },
+  "xo": {
+    "globals": ["cc"],
+    "space": true,
+    "rules": {
+      "arrow-parens": ["error", "always"],
+      "unicorn/filename-case": ["error", {"case": "camelCase"}],
+      "new-cap": ["error", { "capIsNewExceptions": ["Class"] }],
+      "capitalized-comments": 0
+    }
+  }
+}

@@ -1,16 +1,16 @@
 cc.Class({
-    extends: cc.Component,
+  extends: cc.Component,
 
-    properties: {
-    },
+  properties: {
+  },
 
-    // use this for initialization
-    onLoad: function () {
-        console.log(this.node)
-    },
+  // use this for initialization
+  onLoad: () => {
+    console.log(this.node);
+  },
 
-    // called every frame
-    update: function (dt) {
+  // called every frame
+  update: () => {
 
-    },
+  }
 });
