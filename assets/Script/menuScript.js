@@ -5,12 +5,12 @@ cc.Class({
   },
 
   // use this for initialization
-  onLoad: () => {
+  onLoad() {
     console.log(this.node);
   },
 
   // called every frame
-  update: () => {
+  update() {
 
   }
 });
