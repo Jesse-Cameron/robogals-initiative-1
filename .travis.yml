@@ -1,8 +1,10 @@
 os: osx
 before_install:
-  - brew update
+  - brew update -quiet
 install:
+  - npm install -quiet
+script:
+  - npm lint # disable testing until we have test cases
+before_deploy:
   - chmod +x scripts/*
   - ./scripts/build_project.sh
-script:
-  - echo "hello world"
