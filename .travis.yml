@@ -1,5 +1,8 @@
 os: osx
 before_install:
   - brew update
+install:
+  - chmod +x scripts/*
+  - ./scripts/build_project.sh
 script:
   - echo "hello world"
