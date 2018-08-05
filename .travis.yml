@@ -1,11 +1,9 @@
 os: osx
 before_install:
   - brew update
-  - brew install jq
 install:
   - npm install -q
-script:
-  - npm run lint # disable testing until we have test cases
-before_deploy:
   - chmod +x scripts/*
   - ./scripts/build_project.sh
+script:
+  - npm run lint # disable testing until we have test cases

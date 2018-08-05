@@ -8,12 +8,14 @@ curl -O http://digitalocean.cocos2d-x.org/CocosCreator/v1.10.0/$COCOS_DMG
 hdiutil convert $COCOS_DMG -format UDTO -o cocos.cdr
 hdiutil attach -noautoopen -mountpoint $COCOS_MNT cocos.cdr
 
-# set the cocos language
+# init the cocos setting
+pwd
+ls
+cp ./scripts/cocos_settings.json ~/.CocosCreator/settings.json
 cat ~/.CocosCreator/settings.json
 
-# build the damn file
-$COCOS_MNT/CocosCreator.app/Contents/MacOS/CocosCreator --path ../ --build "platform=web-desktop"
-
+# build the damn files
+$COCOS_MNT/CocosCreator.app/Contents/MacOS/CocosCreator --path . --build "platform=web-desktop" --configPath="build_config.json"
 
 # detach and remove
 rm -rf $COCOS_DMG
