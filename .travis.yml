@@ -3,7 +3,9 @@ before_install:
   - brew update
 install:
   - npm install -q
-  - chmod +x scripts/*
+  - chmod a+xr ./scripts/*
+  - ls -al ./scripts/
   - ./scripts/build_project.sh
+  - ./scripts/gh_pages_deploy.sh
 script:
   - npm run lint # disable testing until we have test cases
