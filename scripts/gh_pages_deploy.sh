@@ -7,10 +7,12 @@
 ls
 mkdir ../tmp
 mv ./build/web-desktop/* ../tmp/
-ls ../tmp
+
+ls -al ..
+ls -al ../tmp
 rm -rf ./*
-mv ../tmp/* ./*
-ls
+mv ../tmp/* ./
+ls -al
 pwd
 
 # commit
