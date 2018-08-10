@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -ex
+
 COCOS_DMG="CocosCreator_v1.10.0_20180730.dmg"
 COCOS_MNT="cocos_mount"
 

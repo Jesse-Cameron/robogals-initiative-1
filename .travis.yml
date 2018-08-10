@@ -1,6 +1,6 @@
 os: osx
 before_install:
-  - brew update
+  - brew update && brew install jq
 install:
   - npm install -q
 script:
