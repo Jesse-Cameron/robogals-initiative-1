@@ -1,12 +1,15 @@
 os: osx
 before_install:
-  - brew update && brew install jq
+- brew update && brew install jq
 install:
-  - npm install -q
+- npm install -q
 script:
-  - npm run lint # disable testing until we have test cases
+- npm run lint
 after_script:
-  - chmod a+xr ./scripts/*
-  - ls -al ./scripts/
-  - ./scripts/build_project.sh
-  - ./scripts/gh_pages_deploy.sh
+- chmod a+xr ./scripts/*
+- ls -al ./scripts/
+- "./scripts/build_project.sh"
+- "./scripts/gh_pages_deploy.sh"
+env:
+  global:
+    secure: tgZ7RfuhiOFDA2WDuk7xJ+GYUDDjJ/L3UONh1XmveP25ZUCo4TbMApl/c6ivVvZz5zGRWnsZnvv+fuQPXRiucQTVEmltv2WNEURvbY1TQLsLH5JJF6m6lMeX466ejAQlhC00UZnCVEhlq42Z6D7jDWD4z5RAybwp4+RBG9aB8CP9sAcQFqaHiI9tTYgSO8MH6bVuU0Ebv4BsOiyQuhK6CuyFwi6qxZBUf0faF4PTFxC74R/fVREyk+cWfCvqwMyE6jiqhUgc1LZmcKRQsUOontgskh97G/E2czrAMSLHDQ7IEJdb84LN0TJmqT320D0X2HB43DojVLyeiQkfKhzf9XxR65bjYgVheiV4zCz7SSSVyqFHYymbZL4SSymFqZEgHMZA4JXM4HCGBshSOE4xU2WLZU949X1shbNEuJmqXtJoqioxKWjRUApUvPdVTciL94prbcpscjiIt7f820PZumpNDBLeMNMbtOMO6uipSgbrrJ/ZAvM7j/yISb7kWrwAYkGFcz52uQbhZouACtarOI/JLNmXVrEzEey7mPRHiu/CTgXtQHfbkhX9Kh3jFDJBNMgf/h56HG3TtmLgzovIw1yOz+iZpJfXZWGafaWG3revmJkg27pNB8o+x4kkmoinmdeOSwdDQtjFoQjUbvvhoS2O3FCmUEo50yz0bgOvzYI=
