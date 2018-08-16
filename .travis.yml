@@ -10,14 +10,9 @@ before_deploy:
 - ls -al ./scripts/
 - "./scripts/build_project.sh"
 deploy:
-<<<<<<< HEAD
   provider: script
+  script: bash scripts/gh_pages_deploy.sh
   skip_cleanup: true
-=======
-  skip_cleanup: true
-- provider: script
->>>>>>> 3adebe73dba0266bd852949b9ee7d780570f3009
-  script: ./scripts/gh_pages_deploy.sh
   on:
     branch: develop
 env:
