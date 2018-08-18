@@ -3,7 +3,7 @@ const { changeScene } = require('./Util/sceneUtils');
 
 const setupEventHandlers = (that) => {
   that.sLabel.on('mousedown', () => {
-    changeScene('science_level');
+    changeScene('menu');
   });
 };
 
@@ -13,14 +13,15 @@ cc.Class({
   properties: {
   },
 
-  // use this for initialization
+  // LIFE-CYCLE CALLBACKS:
   onLoad() {
-    this.sLabel = this.node.getChildByName('label_S');
+    this.sLabel = this.node.getChildByName('home_button');
     setupEventHandlers(this);
-  },
-
-  // called every frame
-  update() {
-
   }
+
+  // start() {
+
+  // },
+
+  // update (dt) {},
 });
