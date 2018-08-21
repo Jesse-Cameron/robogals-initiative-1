@@ -1,4 +1,3 @@
-
 const { changeScene } = require('./Util/sceneUtils');
 const { MENU_SCENE } = require('./constants');
 
