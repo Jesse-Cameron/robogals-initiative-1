@@ -41,7 +41,11 @@
           ]
         }
       ],
-      "capitalized-comments": 0
+      "capitalized-comments": 0,
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ]
     }
   }
 }

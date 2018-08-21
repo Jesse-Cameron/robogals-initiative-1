@@ -1,4 +1,6 @@
 os: osx
+notifications:
+  email: false
 before_install:
 - brew update && brew install jq
 install:

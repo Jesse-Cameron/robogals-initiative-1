@@ -1,3 +1,12 @@
+const { changeScene } = require('./Util/sceneUtils');
+const { SCIENCE_SCENE } = require('./constants');
+
+const setupEventHandlers = (that) => {
+  that.sLabel.on('mousedown', () => {
+    changeScene(SCIENCE_SCENE);
+  });
+};
+
 cc.Class({
   extends: cc.Component,
 
@@ -6,7 +15,8 @@ cc.Class({
 
   // use this for initialization
   onLoad() {
-    console.log(this.node);
+    this.sLabel = this.node.getChildByName('spriteS');
+    setupEventHandlers(this);
   },
 
   // called every frame
