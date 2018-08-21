@@ -1,9 +1,10 @@
 
 const { changeScene } = require('./Util/sceneUtils');
+const { MENU_SCENE } = require('./constants');
 
 const setupEventHandlers = (that) => {
-  that.sLabel.on('mousedown', () => {
-    changeScene('menu');
+  that.homeSprite.on('mousedown', () => {
+    changeScene(MENU_SCENE);
   });
 };
 
@@ -15,7 +16,7 @@ cc.Class({
 
   // LIFE-CYCLE CALLBACKS:
   onLoad() {
-    this.sLabel = this.node.getChildByName('home_button');
+    this.homeSprite = this.node.getChildByName('home_button');
     setupEventHandlers(this);
   }
 

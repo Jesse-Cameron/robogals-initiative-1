@@ -1,9 +1,9 @@
-
 const { changeScene } = require('./Util/sceneUtils');
+const { SCIENCE_SCENE } = require('./constants');
 
 const setupEventHandlers = (that) => {
   that.sLabel.on('mousedown', () => {
-    changeScene('science_level');
+    changeScene(SCIENCE_SCENE);
   });
 };
 
@@ -15,7 +15,7 @@ cc.Class({
 
   // use this for initialization
   onLoad() {
-    this.sLabel = this.node.getChildByName('label_S');
+    this.sLabel = this.node.getChildByName('spriteS');
     setupEventHandlers(this);
   },
 
