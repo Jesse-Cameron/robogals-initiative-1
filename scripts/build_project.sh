@@ -3,7 +3,7 @@
 set -ex
 
 COCOS_VERSION=v2.0.1
-COCOS_DMG="CocosCreator_${COCOS_VERSION}_20180730.dmg"
+COCOS_DMG="CocosCreator_${COCOS_VERSION}_20180823.dmg"
 COCOS_MNT="cocos_mount"
 
 # attach and install cocos
