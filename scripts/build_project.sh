@@ -2,7 +2,7 @@
 
 set -ex
 
-COCOS_VERSION=v1.10.0
+COCOS_VERSION=v2.0.1
 COCOS_DMG="CocosCreator_${COCOS_VERSION}_20180730.dmg"
 COCOS_MNT="cocos_mount"
 
