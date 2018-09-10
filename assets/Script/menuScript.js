@@ -1,4 +1,4 @@
-const { changeScene } = require('./Util/sceneUtils');
+const { changeScene } = require('./util/sceneUtils');
 const {
   SCI_NARRATIVE_1_SCENE,
   TECH_NARRATIVE_1_SCENE

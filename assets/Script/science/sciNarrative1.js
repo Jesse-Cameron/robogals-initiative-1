@@ -1,5 +1,5 @@
-const { changeScene } = require('./Util/sceneUtils');
-const { MENU_SCENE } = require('./constants');
+const { changeScene } = require('../util/sceneUtils');
+const { MENU_SCENE } = require('../constants');
 
 const setupEventHandlers = (that) => {
   that.homeSprite.on('mousedown', () => {
