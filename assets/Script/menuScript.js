@@ -1,9 +1,16 @@
-const { changeScene } = require('./Util/sceneUtils');
-const { SCIENCE_SCENE } = require('./constants');
+const { changeScene } = require('./util/sceneUtils');
+const {
+  SCI_NARRATIVE_1_SCENE,
+  TECH_NARRATIVE_1_SCENE
+} = require('./constants');
 
 const setupEventHandlers = (that) => {
   that.sLabel.on('mousedown', () => {
-    changeScene(SCIENCE_SCENE);
+    changeScene(SCI_NARRATIVE_1_SCENE);
+  });
+
+  that.tLbl.on('mousedown', () => {
+    changeScene(TECH_NARRATIVE_1_SCENE);
   });
 };
 
@@ -16,6 +23,7 @@ cc.Class({
   // use this for initialization
   onLoad() {
     this.sLabel = this.node.getChildByName('spriteS');
+    this.tLbl = this.node.getChildByName('spriteT');
     setupEventHandlers(this);
   },
 
