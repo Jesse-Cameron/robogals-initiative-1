@@ -9,7 +9,6 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 const setupEventHandlers = (that) => {
-    console.log("setup Event Handlers");
     that.block1.on('mousedown', () => {
         console.log("Block Clicked");
     });
@@ -25,11 +24,9 @@ cc.Class({
     onLoad () {
         this.block1 = cc.find("Main Camera/block1", this.node);
         setupEventHandlers(this);
-        console.log("Loaded");
     },
 
     start () {
-        console.log("Game Started");
     },
 
     // update (dt) {},
