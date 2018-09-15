@@ -9,11 +9,16 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 const setupEventHandlers = (that) => {
-    that.block1.on('mousedown', () => {
-        console.log("Block Clicked");
+    that.block1.on('touchstart', (startEvent) => {
+        that.block1.on('touchmove', () => {
+            var touchDeltaX = startEvent.touch.getDelta().x; 
+            var newPosition = cc.v2(touchDeltaX, 0); 
+            var blockAction = cc.moveBy(0, newPosition); 
+            that.block1.runAction(blockAction);
+        });
     });
-  };
 
+  };
 
 cc.Class({
     extends: cc.Component,
@@ -22,7 +27,7 @@ cc.Class({
     },
 
     onLoad () {
-        this.block1 = cc.find("Main Camera/block1", this.node);
+        this.block1 = this.node.getChildByName('block1');
         setupEventHandlers(this);
     },
 
