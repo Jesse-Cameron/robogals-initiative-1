@@ -36,5 +36,6 @@
     "subContext": ""
   },
   "xxteaKey": "1e3b10c9-6746-4a",
-  "zipCompressJs": true
+  "zipCompressJs": true,
+  "renderMode": "0"
 }
