@@ -1,5 +1,7 @@
-const { changeScene } = require('../util/sceneUtils');
-const { MENU_SCENE } = require('../constants');
+const { changeScene
+      , gameTimer} = require('../util/sceneUtils');
+const { MENU_SCENE
+        , TIMEOUT} = require('../constants');
 
 const setupEventHandlers = (that) => {
   that.homeSprite.on('mousedown', () => {
@@ -17,6 +19,7 @@ cc.Class({
   onLoad() {
     this.homeSprite = this.node.getChildByName('home_button');
     setupEventHandlers(this);
+    gameTimer(this,'next', TIMEOUT);
   }
 
   // start() {
