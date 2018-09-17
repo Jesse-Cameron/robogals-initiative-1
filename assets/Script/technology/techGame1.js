@@ -1,16 +1,17 @@
+const { FADE_TIME } = require('../constants');
+
 cc.Class({
   extends: cc.Component,
 
   properties: {
-    canvas: cc.Node
   },
 
   // LIFE-CYCLE CALLBACKS:
   onLoad() {
-    this.canvas.opacity = 0;
-    this.canvas.color = new cc.Color(0, 0, 0);
-    this.canvas.runAction(
-      cc.fadeIn(2.0)
+    this.node.opacity = 0;
+    this.node.color = new cc.Color(0, 0, 0);
+    this.node.runAction(
+      cc.fadeIn(FADE_TIME)
     );
   }
 

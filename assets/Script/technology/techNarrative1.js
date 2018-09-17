@@ -1,4 +1,4 @@
-const { changeScene } = require('../util/sceneUtils');
+const { changeScene, changeSceneFade } = require('../util/sceneUtils');
 const {
   MENU_SCENE,
   TECH_GAME_1_SCENE
@@ -10,7 +10,7 @@ const setupEventHandlers = (that) => {
   });
 
   that.nextSprite.on('mousedown', () => {
-    changeScene(TECH_GAME_1_SCENE);
+    changeSceneFade(that, TECH_GAME_1_SCENE);
   });
 };
 
