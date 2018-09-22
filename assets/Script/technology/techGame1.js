@@ -37,7 +37,7 @@ cc.Class({
         this.blockSprite.setPosition(blockPosX, blockPosY);
         this.allBlocks = [this.blockSprite];
         
-        for (i = 0; i < numberBlocks; i++){
+        for (i = 0; i < numberBlocks - 1; i++){
             //Create new block 
             blockPosX += (distanceTwoBlocks + blockWidth); 
             var node = new cc.Node();
