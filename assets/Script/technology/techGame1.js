@@ -25,12 +25,12 @@ cc.Class({
 
         var numberBlocks = generateNumberBlocks();
         var blockPosY = this.blockSprite.getPosition().y;
-        var blockWidth = this.blockSprite.getBoundingBox().size.height;   
+        var blockWidth = this.blockSprite.getBoundingBox().size.width;   
         
-        var distanceTwoBlocks = 80;
+        var distanceTwoBlocks = 30;
 
         //total widths of all blocks
-        var totalWidth = (blockWidth + distanceTwoBlocks) * numberBlocks 
+        var totalWidth = blockWidth * numberBlocks  + distanceTwoBlocks * (numberBlocks - 1)
         var blockPosX = - totalWidth / 2;
 
         //first block is at the most left position
@@ -39,7 +39,7 @@ cc.Class({
         
         for (i = 0; i < numberBlocks; i++){
             //Create new block 
-            blockPosX += (80 + blockWidth); 
+            blockPosX += (distanceTwoBlocks + blockWidth); 
             var node = new cc.Node();
             node.setPosition(blockPosX,blockPosY);
             var newsprite = node.addComponent(cc.Sprite);
