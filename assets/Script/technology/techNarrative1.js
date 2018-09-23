@@ -19,7 +19,7 @@ cc.Class({
   onLoad() {
     this.homeSprite = this.node.getChildByName('home_button');
     setupEventHandlers(this);
-    gameTimer(this,'next', TIMEOUT);
+    gameTimer(this, this.node.getChildByName('placeholder'), TIMEOUT);
   }
 
   // start() {
