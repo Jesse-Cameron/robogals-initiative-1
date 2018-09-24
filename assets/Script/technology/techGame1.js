@@ -11,10 +11,38 @@
 const setupEventHandlers = (that) => {
     that.block1.on('touchstart', (startEvent) => {
         that.block1.on('touchmove', () => {
-            var touchDeltaX = startEvent.touch.getDelta().x; 
-            var newPosition = cc.v2(touchDeltaX, 0); 
-            var blockAction = cc.moveBy(0, newPosition); 
-            that.block1.runAction(blockAction);
+            console.log(startEvent.touch);
+            var deltaX = startEvent.touch.getDelta().x;    // get touch movement in x axis
+            console.log(deltaX);
+
+            var blockWidth = that.block1.width;
+            var blockX = that.block1.position.x;
+            var blockY = that.block1.position.y;
+
+            var frameWidth = cc.view.getFrameSize().width;
+            var frameLeftX = frameWidth/2 * -1;         // get frame's left x coordinate
+            var frameRightX = frameWidth/2;             // get frame's right x coordinate
+            
+            var nextX = blockX + deltaX;                    // next x coord for block
+            var newPosition  = cc.v2(nextX, blockY);        // position vector
+
+            var blockLeft = nextX - blockWidth/2;            // block's left edge Xcoord
+            var blockRight = nextX + blockWidth/2;           // block's right edge Xcoord
+
+            if(blockLeft <= frameLeftX){  // if block tries to move past left edge
+                newPosition = cc.v2(frameLeftX + blockWidth/2, blockY); // create v2 type
+                console.log("HITLEFT " + " newposition: "+ newPosition + " frameLeftX: " + frameLeftX + " blockWidth/2: " + blockWidth/2);
+
+            }
+            else if(blockRight >= frameRightX){ // if block tries to move past right edge
+                newPosition = cc.v2(frameRightX - blockWidth/2, blockY); // create v2 type
+                console.log("HITRight " + " newposition: "+ newPosition + " frameRightX: " + frameRightX + " blockWidth/2: " + blockWidth/2);
+            }
+            else{
+                console.log("Normal " + " newposition: "+ newPosition + " deltaX: " + deltaX + " blockX: " + blockX + " blockWidth/2: " + blockWidth/2);
+            }
+            var blockAction = cc.moveTo(0, newPosition); 
+            that.block1.runAction(blockAction);   
         });
     });
 

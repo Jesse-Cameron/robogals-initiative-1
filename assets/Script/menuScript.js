@@ -21,7 +21,7 @@ cc.Class({
   },
 
   // use this for initialization
-  onLoad() {
+  onLoad() { O
     this.sLabel = this.node.getChildByName('spriteS');
     this.tLbl = this.node.getChildByName('spriteT');
     setupEventHandlers(this);
