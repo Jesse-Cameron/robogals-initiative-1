@@ -1,8 +1,7 @@
 const { changeScene } = require('./util/sceneUtils');
 const {
   SCI_NARRATIVE_1_SCENE,
-  TECH_NARRATIVE_1_SCENE,
-  TECH_GAME_1_SCENE
+  TECH_NARRATIVE_1_SCENE
 } = require('./constants');
 
 const setupEventHandlers = (that) => {
@@ -11,8 +10,7 @@ const setupEventHandlers = (that) => {
   });
 
   that.tLbl.on('mousedown', () => {
-    //changeScene(TECH_NARRATIVE_1_SCENE);
-    changeScene(TECH_GAME_1_SCENE);
+    changeScene(TECH_NARRATIVE_1_SCENE);
   });
 };
 
