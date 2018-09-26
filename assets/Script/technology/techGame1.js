@@ -1,51 +1,51 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+
+const limit = (x) => {
+  const maxMove = 80;
+  return Math.tanh(1 / maxMove * x) * maxMove;
+};
 
 const setupEventHandlers = (that) => {
-    that.block1.on('touchmove', (moveEvent) => {
-        if(moveEvent.getID() != 0)
-            return;
+  that.block1.on('touchmove', (moveEvent) => {
+    if (moveEvent.getID() !== 0) {
+      return;
+    }
 
-        const halfWidth = that.block1.width/2
-        const frameWidth = cc.view.getFrameSize().width;   
-        const blockX = that.block1.position.x; // convert block coordinates
-        const deltaX = moveEvent.getDelta().x;
-        var nextX = blockX + deltaX;
+    const blockX = that.block1.position.x; // convert block coordinates
+    const deltaX = moveEvent.getDelta().x;
+    const nextX = blockX + limit(deltaX);
+    const newPosition = cc.v2(nextX, that.block1.position.y);
 
-        const limit = frameWidth/2-halfWidth;
-        if(nextX < 0){
-            nextX = Math.max(nextX, -limit);
-        }
-        if (nextX > 0){
-            nextX = Math.min(nextX, limit);
-        }
-        const blockAction = cc.moveTo(0, cc.v2(nextX, that.block1.position.y)); 
-        that.block1.runAction(blockAction); 
-        // }
-    });
+    const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x;
 
-  };
+    if (worldX > 760) {
+      that.block1.emit('touchend');
+      return;
+    }
+
+    if (worldX < 160) {
+      that.block1.emit('touchend');
+      return;
+    }
+    // console.log(`delta ${deltaX}, activated: ${limit(deltaX)}`);
+
+    const blockAction = cc.moveTo(0, newPosition);
+    that.block1.runAction(blockAction);
+  });
+};
 
 cc.Class({
-    extends: cc.Component,
+  extends: cc.Component,
 
-    properties: {
-    },
+  properties: {
+  },
 
-    onLoad () {
-        this.block1 = this.node.getChildByName('block1');
-        setupEventHandlers(this);
-    },
+  onLoad() {
+    this.block1 = this.node.getChildByName('block1');
+    setupEventHandlers(this);
+  },
 
-    start () {
-    },
+  start() {
+  }
 
-    // update (dt) {},
+  // update (dt) {},
 });
