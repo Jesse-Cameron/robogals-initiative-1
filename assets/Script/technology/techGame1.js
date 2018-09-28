@@ -1,4 +1,5 @@
-const { FADE_TIME } = require('../constants');
+const { gameTimer } = require('../util/sceneUtils');
+const { FADE_TIME, TIMEOUT } = require('../constants');
 
 cc.Class({
   extends: cc.Component,
@@ -13,6 +14,11 @@ cc.Class({
     this.node.runAction(
       cc.fadeIn(FADE_TIME)
     );
+
+    gameTimer(this, TIMEOUT, () => {
+      const label = this.node.getChildByName('timer_lbl');
+      label.getComponent(cc.Label).string = 'Times up!';
+    });
   }
 
   // start() {
