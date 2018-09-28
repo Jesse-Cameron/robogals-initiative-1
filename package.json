@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "xo",
-    "test": "jest && xo"
+    "test": "jest && xo",
+    "lint:fix": "xo --fix"
   },
   "repository": {
     "type": "git",
