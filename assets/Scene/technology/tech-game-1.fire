@@ -70,16 +70,19 @@
       },
       {
         "__id__": 6
+      },
+      {
+        "__id__": 8
       }
     ],
     "_active": true,
     "_level": 0,
     "_components": [
       {
-        "__id__": 8
+        "__id__": 10
       },
       {
-        "__id__": 9
+        "__id__": 11
       }
     ],
     "_prefab": null,
@@ -329,6 +332,92 @@
     "_zoomRatio": 1,
     "_targetTexture": null,
     "_id": "f2euV+CotN3a6JULO7hDNR"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "timer_lbl",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 1,
+    "_components": [
+      {
+        "__id__": 9
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 36,
+      "g": 36,
+      "b": 36,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 56,
+      "height": 18
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": -417,
+      "y": 272,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "groupIndex": 0,
+    "_id": "27Qu/rErNO8JP+CVtgSSjP"
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 8
+    },
+    "_enabled": true,
+    "_srcBlendFactor": 1,
+    "_dstBlendFactor": 771,
+    "_useOriginalSize": false,
+    "_string": "TIMER",
+    "_N$string": "TIMER",
+    "_fontSize": 18,
+    "_lineHeight": 18,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_id": "dc39pVghBON4afWILhhrDc"
   },
   {
     "__type__": "cc.Canvas",
