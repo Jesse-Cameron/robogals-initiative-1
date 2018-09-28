@@ -1,5 +1,4 @@
-const { changeScene
-      , gameTimer} = require('../util/sceneUtils');
+const { changeScene } = require('../util/sceneUtils');
 const { MENU_SCENE } = require('../constants');
 
 const setupEventHandlers = (that) => {
@@ -18,7 +17,6 @@ cc.Class({
   onLoad() {
     this.homeSprite = this.node.getChildByName('home_button');
     setupEventHandlers(this);
-    gameTimer('next');
   }
 
   // start() {
