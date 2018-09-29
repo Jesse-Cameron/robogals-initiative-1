@@ -60,6 +60,8 @@ const setupEventHandlers = (that) => {
   });
 };
 
+const { FADE_TIME } = require('../constants');
+
 cc.Class({
   extends: cc.Component,
 
@@ -74,8 +76,8 @@ cc.Class({
       cc.fadeIn(FADE_TIME)
     );
 
+    // touch input block
     this.block1 = this.node.getChildByName('block1');
-
     setupEventHandlers(this);
   }
 
