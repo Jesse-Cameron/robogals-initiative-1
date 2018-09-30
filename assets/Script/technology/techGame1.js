@@ -10,7 +10,6 @@ const generateNumberBlocks = () => {
   return Math.floor(Math.random() * MAX_BLOCK_NUMBER);
 };
 
-
 const setupEventHandlers = (that) => {
   that.count = 0;
   that.gameTimerCb = () => {
@@ -102,6 +101,6 @@ cc.Class({
     for (let i = 0; i < numberBlocks; i++) {
       this.allBlocks[i].y -= this.speed * dt;
     }
-  },
-  
+  }
+
 });
