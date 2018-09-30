@@ -5,24 +5,30 @@ const limit = (x) => {
 };
 
 const setupEventHandlers = (that) => {
+
+  const bufferSize = 50;    // margin between block and edge of screen
+  const frameWidth = cc.view.getFrameSize().width;
+
   that.block1.on('touchmove', (moveEvent) => {
     if (moveEvent.getID() !== 0) {
       return;
     }
 
     const blockX = that.block1.position.x; // convert block coordinates
+    const blockWidth = that.block1.width;
+
     const deltaX = moveEvent.getDelta().x;
     const nextX = blockX + limit(deltaX);
     const newPosition = cc.v2(nextX, that.block1.position.y);
 
     const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x;
 
-    if (worldX > 760) {
+    if (worldX > frameWidth - blockWidth/2 - bufferSize) {
       that.block1.emit('touchend');
       return;
     }
 
-    if (worldX < 160) {
+    if (worldX <  blockWidth/2 + bufferSize) { 
       that.block1.emit('touchend');
       return;
     }
@@ -33,8 +39,6 @@ const setupEventHandlers = (that) => {
   });
 };
 
-const { FADE_TIME } = require('../constants');
-
 cc.Class({
   extends: cc.Component,
 
@@ -43,11 +47,6 @@ cc.Class({
 
   // LIFE-CYCLE CALLBACKS:
   onLoad() {
-    this.node.opacity = 0;
-    this.node.color = new cc.Color(0, 0, 0);
-    this.node.runAction(
-      cc.fadeIn(FADE_TIME)
-    );
 
     // touch input block
     this.block1 = this.node.getChildByName('block1');
