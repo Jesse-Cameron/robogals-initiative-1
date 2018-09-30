@@ -8,4 +8,6 @@ exports.TECH_GAME_1_SCENE = 'tech-game-1';
 
 /* ANIMATION CONSTANTS */
 
+exports.TIMEOUT = 30; // seconds
+
 exports.FADE_TIME = 0.8;
