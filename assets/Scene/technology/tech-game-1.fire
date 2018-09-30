@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.9109375,
-      "y": 0.9109375,
+      "x": 0.7713320579802395,
+      "y": 0.7713320579802395,
       "z": 1
     },
     "_quat": {
@@ -352,9 +352,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 36,
-      "g": 36,
-      "b": 36,
+      "r": 0,
+      "g": 77,
+      "b": 21,
       "a": 255
     },
     "_contentSize": {
@@ -413,7 +413,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$horizontalAlign": 1,
+    "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
