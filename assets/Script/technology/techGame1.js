@@ -6,11 +6,10 @@ const limit = (x) => {
   return Math.tanh(1 / maxMove * x) * maxMove;
 };
 
-const bufferSize = 50;    // margin between block and edge of screen
+const bufferSize = 50; // margin between block and edge of screen
 const frameWidth = cc.view.getFrameSize().width;
 
 const setupEventHandlers = (that) => {
-
   that.block1.on('touchmove', (moveEvent) => {
     if (moveEvent.getID() !== 0) {
       return;
@@ -25,12 +24,12 @@ const setupEventHandlers = (that) => {
 
     const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x;
 
-    if (worldX > frameWidth - blockWidth/2 - bufferSize) {
+    if (worldX > (frameWidth - (blockWidth / 2) - bufferSize)) {
       that.block1.emit('touchend');
       return;
     }
 
-    if (worldX <  blockWidth/2 + bufferSize) { 
+    if (worldX < ((blockWidth / 2) + bufferSize)) {
       that.block1.emit('touchend');
       return;
     }
@@ -56,9 +55,7 @@ const setupEventHandlers = (that) => {
         break;
     }
     that.count += 1;
-
   };
-
   gameTimer({
     component: that,
     length: TIMEOUT,
@@ -82,7 +79,7 @@ cc.Class({
     );
 
     // touch input block
-    this.block1 = this.node.getChildByName("block1");
+    this.block1 = this.node.getChildByName('block1');
     setupEventHandlers(this);
   }
   // start() {
