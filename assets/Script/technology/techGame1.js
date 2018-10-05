@@ -10,24 +10,7 @@ const bufferSize = 50;    // margin between block and edge of screen
 const frameWidth = cc.view.getFrameSize().width;
 
 const setupEventHandlers = (that) => {
-  that.count = 0;
-  that.gameTimerCb = () => {
-    const label = that.node.getChildByName('timer_lbl');
-    switch (that.count) {
-      case 0:
-        label.color = new cc.Color(184, 95, 0);
-        break;
-      case 1:
-        label.color = new cc.Color(121, 0, 0);
-        label.getComponent(cc.Label).string = 'TIMES UP';
-        break;
-      default:
-        that.unschedule(that.gameTimerCb);
-        break;
-    }
-    that.count += 1;
 
-  };
   that.block1.on('touchmove', (moveEvent) => {
     if (moveEvent.getID() !== 0) {
       return;
@@ -57,6 +40,25 @@ const setupEventHandlers = (that) => {
     that.block1.runAction(blockAction);
   });
 
+  that.count = 0;
+  that.gameTimerCb = () => {
+    const label = that.node.getChildByName('timer_lbl');
+    switch (that.count) {
+      case 0:
+        label.color = new cc.Color(184, 95, 0);
+        break;
+      case 1:
+        label.color = new cc.Color(121, 0, 0);
+        label.getComponent(cc.Label).string = 'TIMES UP';
+        break;
+      default:
+        that.unschedule(that.gameTimerCb);
+        break;
+    }
+    that.count += 1;
+
+  };
+
   gameTimer({
     component: that,
     length: TIMEOUT,
@@ -73,12 +75,10 @@ cc.Class({
 
   // LIFE-CYCLE CALLBACKS:
   onLoad() {
-
     // touch input block
-    this.block1 = this.node.getChildByName('block1');
+    this.block1 = this.node.getChildByName("block1");
     setupEventHandlers(this);
   }
-
   // start() {
 
   // update (dt) {},
