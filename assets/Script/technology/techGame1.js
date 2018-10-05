@@ -75,6 +75,12 @@ cc.Class({
 
   // LIFE-CYCLE CALLBACKS:
   onLoad() {
+    this.node.opacity = 0;
+    this.node.color = new cc.Color(0, 0, 0);
+    this.node.runAction(
+      cc.fadeIn(FADE_TIME)
+    );
+
     // touch input block
     this.block1 = this.node.getChildByName("block1");
     setupEventHandlers(this);
