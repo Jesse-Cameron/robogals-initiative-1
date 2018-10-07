@@ -1,6 +1,12 @@
 const { gameTimer } = require('../util/sceneUtils');
 const { FADE_TIME, TIMEOUT } = require('../constants');
 
+/**
+ * Limits the x value to a certain size. Using tanh as an activation function
+ *
+ * @param {int} x - the integer you want to limit
+ * @returns integer
+ */
 const limit = (x) => {
   const maxMove = 80;
   return Math.tanh(1 / maxMove * x) * maxMove;
@@ -16,13 +22,13 @@ const setupEventHandlers = (that) => {
       return;
     }
 
-    const blockX = that.block1.position.x; // convert block coordinates
+    const blockX = that.block1.position.x;
 
     const deltaX = moveEvent.getDelta().x;
     const nextX = blockX + limit(deltaX);
     const newPosition = cc.v2(nextX, that.block1.position.y);
 
-    const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x;
+    const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x; // convert block to world coordinates
 
     if (worldX > (frameWidth - halfBlockWidth - bufferSize)) {
       that.block1.emit('touchend');
