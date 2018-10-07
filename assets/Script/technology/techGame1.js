@@ -1,39 +1,44 @@
 const { gameTimer } = require('../util/sceneUtils');
 const { FADE_TIME, TIMEOUT } = require('../constants');
 
+/**
+ * Limits the x value to a certain size. Using tanh as an activation function
+ *
+ * @param {int} x - the integer you want to limit
+ * @returns {int} - new limited x
+ */
 const limit = (x) => {
   const maxMove = 80;
   return Math.tanh(1 / maxMove * x) * maxMove;
 };
 
-const bufferSize = 50; // margin between block and edge of screen
-const frameWidth = cc.view.getFrameSize().width;
-
 const setupEventHandlers = (that) => {
+  const bufferSize = 50; // margin between block and edge of screen
+  const frameWidth = cc.view.getFrameSize().width;
+  const halfBlockWidth = that.block1.width / 2;
+
   that.block1.on('touchmove', (moveEvent) => {
     if (moveEvent.getID() !== 0) {
       return;
     }
 
-    const blockX = that.block1.position.x; // convert block coordinates
-    const blockWidth = that.block1.width;
+    const blockX = that.block1.position.x;
 
     const deltaX = moveEvent.getDelta().x;
     const nextX = blockX + limit(deltaX);
     const newPosition = cc.v2(nextX, that.block1.position.y);
 
-    const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x;
+    const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x; // convert block to world coordinates
 
-    if (worldX > (frameWidth - (blockWidth / 2) - bufferSize)) {
+    if (worldX > (frameWidth - halfBlockWidth - bufferSize)) {
       that.block1.emit('touchend');
       return;
     }
 
-    if (worldX < ((blockWidth / 2) + bufferSize)) {
+    if (worldX < (halfBlockWidth + bufferSize)) {
       that.block1.emit('touchend');
       return;
     }
-    // console.log(`delta ${deltaX}, activated: ${limit(deltaX)}`);
 
     const blockAction = cc.moveTo(0, newPosition);
     that.block1.runAction(blockAction);
