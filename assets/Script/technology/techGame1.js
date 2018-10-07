@@ -6,11 +6,49 @@ const { FADE_TIME, TIMEOUT } = require('../constants');
 
 const MAX_BLOCK_NUMBER = 6;
 
-const generateNumberBlocks = () => {
-  return Math.floor(Math.random() * MAX_BLOCK_NUMBER);
+/**
+ * Limits the x value to a certain size. Using tanh as an activation function
+ *
+ * @param {int} x - the integer you want to limit
+ * @returns {int} - new limited x
+ */
+const limit = (x) => {
+  const maxMove = 80;
+  return Math.tanh(1 / maxMove * x) * maxMove;
 };
 
 const setupEventHandlers = (that) => {
+  const bufferSize = 50; // margin between block and edge of screen
+  const frameWidth = cc.view.getFrameSize().width;
+  const halfBlockWidth = that.block1.width / 2;
+
+  that.block1.on('touchmove', (moveEvent) => {
+    if (moveEvent.getID() !== 0) {
+      return;
+    }
+
+    const blockX = that.block1.position.x;
+
+    const deltaX = moveEvent.getDelta().x;
+    const nextX = blockX + limit(deltaX);
+    const newPosition = cc.v2(nextX, that.block1.position.y);
+
+    const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x; // convert block to world coordinates
+
+    if (worldX > (frameWidth - halfBlockWidth - bufferSize)) {
+      that.block1.emit('touchend');
+      return;
+    }
+
+    if (worldX < (halfBlockWidth + bufferSize)) {
+      that.block1.emit('touchend');
+      return;
+    }
+
+    const blockAction = cc.moveTo(0, newPosition);
+    that.block1.runAction(blockAction);
+  });
+
   that.count = 0;
   that.gameTimerCb = () => {
     const label = that.node.getChildByName('timer_lbl');
@@ -86,6 +124,7 @@ cc.Class({
       this.allBlocks.push(node);
     }
 
+    this.block1 = this.node.getChildByName('block1');
     setupEventHandlers(this);
   },
 
