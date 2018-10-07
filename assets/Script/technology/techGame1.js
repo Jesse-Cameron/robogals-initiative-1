@@ -1,10 +1,11 @@
-const { changeScene } = require('../util/sceneUtils');
-
-const { MENU_SCENE } = require('../constants');
 const { gameTimer } = require('../util/sceneUtils');
 const { FADE_TIME, TIMEOUT } = require('../constants');
 
 const MAX_BLOCK_NUMBER = 6;
+
+const generateNumberBlocks = () => {
+  return Math.floor(Math.random() * MAX_BLOCK_NUMBER);
+};
 
 /**
  * Limits the x value to a certain size. Using tanh as an activation function
@@ -67,10 +68,6 @@ const setupEventHandlers = (that) => {
     that.count += 1;
   };
 
-  that.homeSprite.on('mousedown', () => {
-    changeScene(MENU_SCENE);
-  });
-
   gameTimer({
     component: that,
     length: TIMEOUT,
@@ -93,13 +90,14 @@ cc.Class({
       cc.fadeIn(FADE_TIME)
     );
 
-    this.homeSprite = this.node.getChildByName('home_button');
     this.blockSprite = this.node.getChildByName('block');
 
     const numberBlocks = generateNumberBlocks();
     const blockPosY = this.blockSprite.getPosition().y;
     const blockWidth = this.blockSprite.getBoundingBox().size.width;
     const distanceTwoBlocks = 30;
+    console.log(numberBlocks);
+
 
     // total widths of all blocks
     const totalWidth = (blockWidth * numberBlocks) + (distanceTwoBlocks * (numberBlocks - 1));
@@ -112,13 +110,14 @@ cc.Class({
     for (let i = 0; i < (numberBlocks - 1); i++) {
       // Create new block
       blockPosX += (distanceTwoBlocks + blockWidth);
-      const node = new cc.Node();
+      let node = new cc.Node();
       node.setPosition(blockPosX, blockPosY);
-      const newsprite = node.addComponent(cc.Sprite);
       node.parent = this.node;
-      const url = cc.url.raw('Texture/block.png');
-      const texture = cc.textureCache.addImage(url);
-      newsprite.spriteFrame = new cc.SpriteFrame(texture);
+      
+      cc.loader.loadRes("assets/block", cc.SpriteFrame, function (err, spriteFrame) {
+        let newSprite = node.addComponent(cc.Sprite);
+        newSprite.spriteFrame = spriteFrame;
+      });
 
       // Add to all blocks list
       this.allBlocks.push(node);
