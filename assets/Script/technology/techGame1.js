@@ -5,7 +5,7 @@ const { FADE_TIME, TIMEOUT } = require('../constants');
  * Limits the x value to a certain size. Using tanh as an activation function
  *
  * @param {int} x - the integer you want to limit
- * @returns integer
+ * @returns {int} - new limited x
  */
 const limit = (x) => {
   const maxMove = 80;
