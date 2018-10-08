@@ -76,10 +76,21 @@ const setupEventHandlers = (that) => {
   });
 };
 
+const createFallingBlock = (that) => {
+  const newBlock = cc.instantiate(that.blockPrefab);
+  that.node.addChild(newBlock);
+  const worldX = (Math.random() * cc.view.getFrameSize().width) + 200;
+  console.log(worldX);
+  const spawnX = newBlock.convertToNodeSpace(cc.v2(worldX, that.generatedBlockY)).x;
+  newBlock.setPosition(cc.v2(spawnX, that.generatedBlockY));
+};
+
 cc.Class({
   extends: cc.Component,
 
   properties: {
+    blockPrefab: cc.Prefab,
+    generatedBlockY: 400,
     speed: 200
   },
 
@@ -90,55 +101,13 @@ cc.Class({
       cc.fadeIn(FADE_TIME)
     );
 
-    this.blockSprite = this.node.getChildByName('block');
-
-    const numberBlocks = generateNumberBlocks();
-    const blockPosY = this.blockSprite.getPosition().y;
-    const blockWidth = this.blockSprite.getBoundingBox().size.width;
-    const distanceTwoBlocks = 30;
-    console.log(numberBlocks);
-
-
-    // total widths of all blocks
-    const totalWidth = (blockWidth * numberBlocks) + (distanceTwoBlocks * (numberBlocks - 1));
-    let blockPosX = -totalWidth / 2;
-
-    // first block is at the most left position
-    this.blockSprite.setPosition(blockPosX, blockPosY);
-    this.allBlocks = [this.blockSprite];
-
-    for (let i = 0; i < (numberBlocks - 1); i++) {
-      // Create new block
-      blockPosX += (distanceTwoBlocks + blockWidth);
-      let node = new cc.Node();
-      node.setPosition(blockPosX, blockPosY);
-      node.parent = this.node;
-      
-      cc.loader.loadRes("assets/block", cc.SpriteFrame, function (err, spriteFrame) {
-        let newSprite = node.addComponent(cc.Sprite);
-        newSprite.spriteFrame = spriteFrame;
-      });
-
-      // Add to all blocks list
-      this.allBlocks.push(node);
-    }
+    createFallingBlock(this);
 
     this.block1 = this.node.getChildByName('block1');
     setupEventHandlers(this);
-  },
-
-  onCollisionEnter() {
-    const numberBlocks = this.allBlocks.length;
-    for (let i = 0; i < numberBlocks; i++) {
-      this.allBlocks[i].destroy();
-    }
-  },
-
-  update(dt) {
-    const numberBlocks = this.allBlocks.length;
-    for (let i = 0; i < numberBlocks; i++) {
-      this.allBlocks[i].y -= this.speed * dt;
-    }
   }
+
+  // update(dt) {
+  // }
 
 });
