@@ -1,6 +1,6 @@
 {
   "name": "robogals-initiative-1",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Welcome to the repository for the first ever Robogals' Technology Initiative!",
   "main": "index.js",
   "scripts": {

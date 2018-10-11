@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5702015738474733,
-      "y": 0.5702015738474733,
+      "x": 0.5447038337949011,
+      "y": 0.5447038337949011,
       "z": 1
     },
     "_quat": {
@@ -541,6 +541,8 @@
     },
     "generatedBlockY": 400,
     "speed": 200,
+    "previousDt": 0,
+    "fallRate": 3,
     "_id": "d20QccpnJOObcmQEVigOqW"
   }
 ]

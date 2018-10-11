@@ -1,7 +1,7 @@
 const { gameTimer } = require('../util/sceneUtils');
 const { FADE_TIME, TIMEOUT } = require('../constants');
 
-const MAX_BLOCK_NUMBER = 6;
+const MAX_BLOCK_NUMBER = 3;
 
 const generateNumberBlocks = () => {
   return Math.floor(Math.random() * MAX_BLOCK_NUMBER);
@@ -29,20 +29,18 @@ const setupEventHandlers = (that) => {
     }
 
     const blockX = that.block1.position.x;
-
     const deltaX = moveEvent.getDelta().x;
     const nextX = blockX + limit(deltaX);
     const newPosition = cc.v2(nextX, that.block1.position.y);
-
     const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x; // convert block to world coordinates
 
     if (worldX > (frameWidth - halfBlockWidth - bufferSize)) {
-      that.block1.emit('touchend');
+      that.block1.emit('touchcancel');
       return;
     }
 
     if (worldX < (halfBlockWidth + bufferSize)) {
-      that.block1.emit('touchend');
+      that.block1.emit('touchcancel');
       return;
     }
 
@@ -79,8 +77,7 @@ const setupEventHandlers = (that) => {
 const createFallingBlock = (that) => {
   const newBlock = cc.instantiate(that.blockPrefab);
   that.node.addChild(newBlock);
-  const worldX = (Math.random() * cc.view.getFrameSize().width) + 200;
-  console.log(worldX);
+  const worldX = (Math.random() * (cc.view.getFrameSize().width - 200)) + 400;
   const spawnX = newBlock.convertToNodeSpace(cc.v2(worldX, that.generatedBlockY)).x;
   newBlock.setPosition(cc.v2(spawnX, that.generatedBlockY));
 };
@@ -91,7 +88,9 @@ cc.Class({
   properties: {
     blockPrefab: cc.Prefab,
     generatedBlockY: 400,
-    speed: 200
+    speed: 200,
+    previousDt: 0,
+    fallRate: 3
   },
 
   onLoad() {
@@ -100,14 +99,19 @@ cc.Class({
     this.node.runAction(
       cc.fadeIn(FADE_TIME)
     );
-
-    createFallingBlock(this);
-
     this.block1 = this.node.getChildByName('block1');
     setupEventHandlers(this);
-  }
+  },
 
-  // update(dt) {
-  // }
+  update(dt) {
+    this.previousDt += dt;
+    // generate new blocks by fall rate
+    if ((this.previousDt % this.fallRate).toPrecision(3) >= (this.fallRate - 0.01)) {
+      const numberOfBlocks = generateNumberBlocks();
+      for (let i = 0; i <= numberOfBlocks; i++) {
+        createFallingBlock(this);
+      }
+    }
+  }
 
 });
