@@ -89,6 +89,11 @@ cc.Class({
     );
     this.block1 = this.node.getChildByName('block1');
     setupEventHandlers(this);
+
+    var manager = cc.director.getCollisionManager();
+    manager.enabled = true;
+    manager.enabledDebugDraw = true;
+
   },
 
   update(dt) {
