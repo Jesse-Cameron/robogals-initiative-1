@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5447038337949011,
-      "y": 0.5447038337949011,
+      "x": 0.5,
+      "y": 0.5,
       "z": 1
     },
     "_quat": {
@@ -540,9 +540,9 @@
       "__uuid__": "c667cd27-f46b-402b-8abd-d872dcab70ab"
     },
     "generatedBlockY": 400,
-    "speed": 200,
+    "speed": 300,
     "previousDt": 0,
-    "fallRate": 3,
+    "fallRate": 5,
     "_id": "d20QccpnJOObcmQEVigOqW"
   }
 ]
