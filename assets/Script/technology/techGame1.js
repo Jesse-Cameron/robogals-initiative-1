@@ -80,6 +80,7 @@ const createFallingBlock = (that) => {
   const worldX = (Math.random() * (cc.view.getFrameSize().width - 200)) + 400;
   const spawnX = newBlock.convertToNodeSpace(cc.v2(worldX, that.generatedBlockY)).x;
   newBlock.setPosition(cc.v2(spawnX, that.generatedBlockY));
+  newBlock.color = new cc.Color(255,255,255);
 };
 
 cc.Class({
@@ -104,8 +105,6 @@ cc.Class({
 
     var manager = cc.director.getCollisionManager();
     manager.enabled = true;
-    manager.enabledDebugDraw = true;
-
   },
 
   update(dt) {
