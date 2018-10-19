@@ -47,7 +47,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 350,
-      "y": 309,
+      "y": -121,
       "z": 0
     },
     "_scale": {
@@ -79,8 +79,10 @@
       "__id__": 1
     },
     "_enabled": true,
-    "speed": 200,
-    "_id": "81wFIuWupNBIYDQXCMyxfC"
+    "speed": 100,
+    "movingHorizontal": true,
+    "movingVertical": true,
+    "_id": "b6p0wOvflN/Yr7VeBJAdKg"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -88,7 +90,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c667cd27-f46b-402b-8abd-d872dcab70ab"
     },
     "fileId": "5663GlRLhKaLWjO3x7e/OG",
     "sync": false
