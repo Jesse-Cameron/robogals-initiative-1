@@ -48,9 +48,8 @@ cc.Class({
   properties: {
     blockPrefab: cc.Prefab,
     generatedBlockY: 400,
-    fallingBlockSpeed: 200,
     previousDt: 0,
-    fallRate: 3
+    blockFallRate: 3
   },
 
   onLoad() {
@@ -65,11 +64,12 @@ cc.Class({
   update(dt) {
     this.previousDt += dt;
     // generate new blocks by fall rate
-    if ((this.previousDt % this.fallRate).toPrecision(3) >= (this.fallRate - 0.01)) {
+    if (this.previousDt > this.blockFallRate) {
       const numberOfBlocks = generateNumberBlocks();
       for (let i = 0; i <= numberOfBlocks; i++) {
         createFallingBlock(this);
       }
+      this.previousDt = 0;
     }
   }
 });

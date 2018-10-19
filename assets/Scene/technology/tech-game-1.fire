@@ -451,9 +451,8 @@
       "__uuid__": "c667cd27-f46b-402b-8abd-d872dcab70ab"
     },
     "generatedBlockY": 400,
-    "fallingBlockSpeed": 200,
     "previousDt": 0,
-    "fallRate": 5,
+    "blockFallRate": 2,
     "_id": "d20QccpnJOObcmQEVigOqW"
   },
   {

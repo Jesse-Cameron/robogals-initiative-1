@@ -48,7 +48,7 @@ const movementEventHandler = ({
 };
 
 const setupEventHandler = (that) => {
-  const bufferSize = 50; // margin between block and edge of screen
+  const bufferSize = 25; // margin between block and edge of screen
   const frameWidth = cc.view.getFrameSize().width;
   const halfBlockWidth = that.node.width / 2;
 
@@ -69,11 +69,13 @@ const setupEventHandler = (that) => {
   that.node.on('touchcancel', () => {
     that.movingVertical = true;
     that.movingHorizontal = false;
+    that.node.stopAllActions();
   });
 
   that.node.on('touchend', () => {
     that.movingVertical = true;
     that.movingHorizontal = false;
+    that.node.stopAllActions();
   });
 };
 
