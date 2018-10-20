@@ -7,47 +7,7 @@ const generateNumberBlocks = () => {
   return Math.floor(Math.random() * MAX_BLOCK_NUMBER);
 };
 
-/**
- * Limits the x value to a certain size. Using tanh as an activation function
- *
- * @param {int} x - the integer you want to limit
- * @returns {int} - new limited x
- */
-const limit = (x) => {
-  const maxMove = 80;
-  return Math.tanh(1 / maxMove * x) * maxMove;
-};
-
 const setupEventHandlers = (that) => {
-  const bufferSize = 50; // margin between block and edge of screen
-  const frameWidth = cc.view.getFrameSize().width;
-  const halfBlockWidth = that.block1.width / 2;
-
-  that.block1.on('touchmove', (moveEvent) => {
-    if (moveEvent.getID() !== 0) {
-      return;
-    }
-
-    const blockX = that.block1.position.x;
-    const deltaX = moveEvent.getDelta().x;
-    const nextX = blockX + limit(deltaX);
-    const newPosition = cc.v2(nextX, that.block1.position.y);
-    const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x; // convert block to world coordinates
-
-    if (worldX > (frameWidth - halfBlockWidth - bufferSize)) {
-      that.block1.emit('touchcancel');
-      return;
-    }
-
-    if (worldX < (halfBlockWidth + bufferSize)) {
-      that.block1.emit('touchcancel');
-      return;
-    }
-
-    const blockAction = cc.moveTo(0, newPosition);
-    that.block1.runAction(blockAction);
-  });
-
   that.count = 0;
   that.gameTimerCb = () => {
     const label = that.node.getChildByName('timer_lbl');
@@ -88,9 +48,8 @@ cc.Class({
   properties: {
     blockPrefab: cc.Prefab,
     generatedBlockY: 400,
-    speed: 200,
     previousDt: 0,
-    fallRate: 3
+    blockFallRate: 3
   },
 
   onLoad() {
@@ -99,19 +58,18 @@ cc.Class({
     this.node.runAction(
       cc.fadeIn(FADE_TIME)
     );
-    this.block1 = this.node.getChildByName('block1');
     setupEventHandlers(this);
   },
 
   update(dt) {
     this.previousDt += dt;
     // generate new blocks by fall rate
-    if ((this.previousDt % this.fallRate).toPrecision(3) >= (this.fallRate - 0.01)) {
+    if (this.previousDt > this.blockFallRate) {
       const numberOfBlocks = generateNumberBlocks();
       for (let i = 0; i <= numberOfBlocks; i++) {
         createFallingBlock(this);
       }
+      this.previousDt = 0;
     }
   }
-
 });
