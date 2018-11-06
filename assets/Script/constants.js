@@ -8,5 +8,7 @@ exports.TECH_NARRATIVE_1_SCENE = 'tech-narrative-1';
 /* ANIMATION CONSTANTS */
 
 exports.TIMEOUT = 30; // seconds
-
 exports.FADE_TIME = 0.8;
+
+/* EVENT CONSTANTS */
+exports.GAME_SCORE_EVENT = 'game-score-event';

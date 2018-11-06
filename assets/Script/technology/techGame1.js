@@ -1,5 +1,5 @@
 const { gameTimer } = require('../util/sceneUtils');
-const { FADE_TIME, TIMEOUT } = require('../constants');
+const { FADE_TIME, TIMEOUT, GAME_SCORE_EVENT } = require('../constants');
 
 const MAX_BLOCK_NUMBER = 3;
 
@@ -7,7 +7,19 @@ const generateNumberBlocks = () => {
   return Math.floor(Math.random() * MAX_BLOCK_NUMBER);
 };
 
-const setupEventHandlers = (that) => {
+const handleScoreEvent = ({ type, currentScore, score }) => {
+  switch (type) {
+    case 'ADD':
+      return currentScore + score;
+    case 'MINUS':
+      return currentScore - score;
+    default:
+      cc.log('failed score event');
+      break;
+  }
+};
+
+function setupEventHandlers(that) {
   that.count = 0;
   that.gameTimerCb = () => {
     const label = that.node.getChildByName('timer_lbl');
@@ -32,7 +44,12 @@ const setupEventHandlers = (that) => {
     repeat: 2,
     timeOutCallback: that.gameTimerCb
   });
-};
+
+  that.node.on(GAME_SCORE_EVENT, (event) => {
+    const updatedEvent = Object.assign({}, { currentScore: that.currentScore }, event);
+    that.currentScore = handleScoreEvent(updatedEvent);
+  });
+}
 
 const createFallingBlock = (that) => {
   const newBlock = cc.instantiate(that.blockPrefab);
@@ -49,7 +66,8 @@ cc.Class({
     blockPrefab: cc.Prefab,
     generatedBlockY: 400,
     previousDt: 0,
-    blockFallRate: 3
+    blockFallRate: 3,
+    currentScore: 0
   },
 
   onLoad() {
@@ -61,6 +79,10 @@ cc.Class({
     setupEventHandlers(this);
     const manager = cc.director.getCollisionManager();
     manager.enabled = true;
+    this.node.emit(GAME_SCORE_EVENT, {
+      type: 'ADD',
+      score: 1
+    });
   },
 
   update(dt) {
