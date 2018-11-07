@@ -2,6 +2,7 @@ const { gameTimer } = require('../util/sceneUtils');
 const { FADE_TIME, TIMEOUT, GAME_SCORE_EVENT } = require('../constants');
 
 const MAX_BLOCK_NUMBER = 3;
+const GAME_COMPLETE_SCORE = 10;
 
 const generateNumberBlocks = () => {
   return Math.floor(Math.random() * MAX_BLOCK_NUMBER);
@@ -86,6 +87,10 @@ cc.Class({
   },
 
   update(dt) {
+    if (this.currentScore === GAME_COMPLETE_SCORE) {
+      this.endGame();
+    }
+
     this.previousDt += dt;
     // generate new blocks by fall rate
     if (this.previousDt > this.blockFallRate) {
@@ -94,6 +99,19 @@ cc.Class({
         createFallingBlock(this);
       }
       this.previousDt = 0;
+      // TODO: refactor to fire the event on block match.
+      this.node.emit(GAME_SCORE_EVENT, {
+        type: 'ADD',
+        score: 1
+      });
     }
+  },
+
+  endGame() {
+    const endingLblNode = new cc.Node('endingLbl');
+    endingLblNode.color = new cc.Color(121, 0, 0);
+    const label = endingLblNode.addComponent(cc.Label);
+    label.string = 'You won the game';
+    endingLblNode.parent = this.node;
   }
 });
