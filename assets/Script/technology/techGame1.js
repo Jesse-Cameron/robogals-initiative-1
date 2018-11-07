@@ -8,35 +8,6 @@ const generateNumberBlocks = () => {
 };
 
 const setupEventHandlers = (that) => {
-  const bufferSize = 50; // margin between block and edge of screen
-  const frameWidth = cc.view.getFrameSize().width;
-  const halfBlockWidth = that.block1.width / 2;
-
-  that.block1.on('touchmove', (moveEvent) => {
-    if (moveEvent.getID() !== 0) {
-      return;
-    }
-
-    const blockX = that.block1.position.x;
-    const deltaX = moveEvent.getDelta().x;
-    const nextX = blockX + limit(deltaX);
-    const newPosition = cc.v2(nextX, that.block1.position.y);
-    const worldX = that.block1.parent.convertToWorldSpaceAR(newPosition).x; // convert block to world coordinates
-
-    if (worldX > (frameWidth - halfBlockWidth - bufferSize)) {
-      that.block1.emit('touchcancel');
-      return;
-    }
-
-    if (worldX < (halfBlockWidth + bufferSize)) {
-      that.block1.emit('touchcancel');
-      return;
-    }
-
-    const blockAction = cc.moveTo(0, newPosition);
-    that.block1.runAction(blockAction);
-  });
-
   that.count = 0;
   that.gameTimerCb = () => {
     const label = that.node.getChildByName('timer_lbl');
@@ -69,7 +40,6 @@ const createFallingBlock = (that) => {
   const worldX = (Math.random() * (cc.view.getFrameSize().width - 200)) + 400;
   const spawnX = newBlock.convertToNodeSpace(cc.v2(worldX, that.generatedBlockY)).x;
   newBlock.setPosition(cc.v2(spawnX, that.generatedBlockY));
-  newBlock.color = new cc.Color(255,255,255);
 };
 
 cc.Class({
@@ -88,9 +58,7 @@ cc.Class({
     this.node.runAction(
       cc.fadeIn(FADE_TIME)
     );
-    this.block1 = this.node.getChildByName('block1');
     setupEventHandlers(this);
-
     var manager = cc.director.getCollisionManager();
     manager.enabled = true;
   },

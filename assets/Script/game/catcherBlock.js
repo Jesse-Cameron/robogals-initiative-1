@@ -1,18 +1,18 @@
 cc.Class({
-    extends: cc.Component,
-  
-    properties: {
-        type: {
-            get: function () {
-                return this._type;
-            },
-            set: function (value) {
-                this._type = value;
-            }
-        }
-    },
+  extends: cc.Component,
 
-    onLoad() {
-        this.type = 2;
+  properties: {
+    type: {
+      get() {
+        return this._type;
+      },
+      set(value) {
+        this._type = value;
       }
+    }
+  },
+
+  onLoad() {
+    this.type = 2;
+  }
 });
