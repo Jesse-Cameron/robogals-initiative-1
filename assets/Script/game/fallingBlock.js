@@ -115,10 +115,23 @@ cc.Class({
   // this code is currently unused as we have nothing to collide with !
   onCollisionEnter: function (other, self) {
     console.log(other.node);
+    if(other.node.name == "catcher1" ){
+      other.node.zIndex = 1;                          // +1 catcher zindex - block goes behind catcher
+      const fadeOut = cc.fadeOut(this.fadeOutTime);
+      self.node.runAction(fadeOut);
+      self.node.destroy();
+    }
     if(other.node.name == "catcher2" ){
       other.node.zIndex = 1;                          // +1 catcher zindex - block goes behind catcher
       const fadeOut = cc.fadeOut(this.fadeOutTime);
       self.node.runAction(fadeOut);
+      self.node.destroy();
+    }
+    if(other.node.name == "catcher3" ){
+      other.node.zIndex = 1;                          // +1 catcher zindex - block goes behind catcher
+      const fadeOut = cc.fadeOut(this.fadeOutTime);
+      self.node.runAction(fadeOut);
+      self.node.destroy();
     }
   },
 
