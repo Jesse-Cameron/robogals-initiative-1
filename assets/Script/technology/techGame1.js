@@ -59,7 +59,7 @@ cc.Class({
       cc.fadeIn(FADE_TIME)
     );
     setupEventHandlers(this);
-    var manager = cc.director.getCollisionManager();
+    const manager = cc.director.getCollisionManager();
     manager.enabled = true;
   },
 
