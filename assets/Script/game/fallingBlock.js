@@ -112,9 +112,7 @@ cc.Class({
     this.node.y -= this.speed * dt;
   },
 
-  // this code is currently unused as we have nothing to collide with !
   onCollisionEnter: function (other, self) {
-    console.log(other.node);
     if(other.node.name == "catcher1" ){
       other.node.zIndex = 1;                          // +1 catcher zindex - block goes behind catcher
       const fadeOut = cc.fadeOut(this.fadeOutTime);
