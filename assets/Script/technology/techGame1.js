@@ -34,12 +34,28 @@ const setupEventHandlers = (that) => {
   });
 };
 
-const createFallingBlock = (that) => {
-  const newBlock = cc.instantiate(that.blockPrefab);
-  that.node.addChild(newBlock);
-  const worldX = (Math.random() * (cc.view.getFrameSize().width - 200)) + 400;
-  const spawnX = newBlock.convertToNodeSpace(cc.v2(worldX, that.generatedBlockY)).x;
-  newBlock.setPosition(cc.v2(spawnX, that.generatedBlockY));
+const createFallingBlock = (that, numberOfBlocks) => {
+  let spawnPoints = [];
+  let i = 0;
+  while (i < numberOfBlocks){
+    const newBlock = cc.instantiate(that.blockPrefab);
+    that.node.addChild(newBlock);
+    const worldX = (Math.random() * (cc.view.getFrameSize().width - 200)) + 400;
+    const spawnX = newBlock.convertToNodeSpace(cc.v2(worldX, that.generatedBlockY)).x;
+    let isOverlapped = false;
+    for (let j = 0; j < spawnPoints.length; j++){
+      if (Math.abs(spawnPoints[j] - spawnX) < 200){
+        isOverlapped = true;
+        break;
+      }
+    }
+    if (isOverlapped){
+      continue;
+    }
+    spawnPoints.push(spawnX);
+    newBlock.setPosition(cc.v2(spawnX, that.generatedBlockY));
+    i += 1;
+  }
 };
 
 cc.Class({
@@ -66,9 +82,7 @@ cc.Class({
     // generate new blocks by fall rate
     if (this.previousDt > this.blockFallRate) {
       const numberOfBlocks = generateNumberBlocks();
-      for (let i = 0; i <= numberOfBlocks; i++) {
-        createFallingBlock(this);
-      }
+      createFallingBlock(this, numberOfBlocks);
       this.previousDt = 0;
     }
   }
