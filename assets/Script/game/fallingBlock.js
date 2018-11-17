@@ -13,9 +13,9 @@ cc.Class({
   extends: cc.Component,
 
   properties: {
-    speed: 200,
-    fadeOutTime: 0.4,
-    blockType: 'blue'
+    speed: 50,
+    movingHorizontal: true,
+    movingVertical: true
   },
 
   /**
@@ -109,13 +109,13 @@ cc.Class({
   },
 
   update(dt) {
-    this.node.y -= this.speed * dt;
+    if (this.movingVertical) {
+      this.node.y -= this.speed * dt;
+    }
   },
 
   onCollisionEnter(other, self) {
     if (other.node.name === 'catcher1') {
-      // other.node.zIndex = 1;                          // +1 catcher zindex - block goes behind catcher
-      // const fadeOut = cc.fadeOut(this.fadeOutTime);
       self.node.destroy();
     }
     if (other.node.name === 'catcher2') {
