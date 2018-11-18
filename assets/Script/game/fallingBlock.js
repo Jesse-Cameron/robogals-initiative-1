@@ -112,10 +112,18 @@ cc.Class({
     if (this.movingVertical) {
       this.node.y -= this.speed * dt;
     }
+  },
+
+  onCollisionEnter(other, self) {
+    if (other.node.name === 'catcher1') {
+      self.node.destroy();
+    }
+    if (other.node.name === 'catcher2') {
+      self.node.destroy();
+    }
+    if (other.node.name === 'catcher3') {
+      self.node.destroy();
+    }
   }
 
-  // this code is currently unused as we have nothing to collide with !
-  // onCollisionEnter(other, self) {
-
-  // }
 });
