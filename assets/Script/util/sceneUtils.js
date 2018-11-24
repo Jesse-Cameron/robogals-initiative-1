@@ -24,3 +24,15 @@ exports.changeSceneFade = (that, nextScene) => {
     })
   ));
 };
+
+/**
+ * Check if x1 is within the distance of x2
+ *
+ * @param {Integer} x1 - the first x coord
+ * @param {Integer} x2 - the x coord we are comparing against
+ * @param {Integer} distance - the distance you want to compare
+ * @returns {Boolean} - true if x1 is within distance of x2, false otherwise
+ */
+exports.willCollide = (x1, x2, distance) => {
+  return Math.abs(x1 - x2) <= distance;
+};

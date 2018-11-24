@@ -18,9 +18,16 @@
     "jest": "^23.4.2",
     "xo": "^0.21.1"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "xo": {
     "globals": [
-      "cc"
+      "cc",
+      "describe",
+      "it",
+      "test",
+      "expect"
     ],
     "space": true,
     "rules": {
@@ -48,5 +55,8 @@
         "always"
       ]
     }
+  },
+  "dependencies": {
+    "g": "^2.0.1"
   }
 }
